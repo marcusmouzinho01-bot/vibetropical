@@ -9,6 +9,7 @@ import Soon from './pages/Soon'
 import Vendas from './pages/Vendas'
 import Produtos from './pages/Produtos'
 import Pedidos from './pages/Pedidos'
+import Financeiro from './pages/Financeiro'
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
@@ -27,7 +28,8 @@ export default function App() {
         <Route path="vendas" element={<Vendas />} />
         <Route path="produtos" element={<Produtos />} />
         <Route path="pedidos" element={<Pedidos />} />
-        {NAV.slice(1).filter(n => n.to !== '/vendas' && n.to !== '/produtos' && n.to !== '/pedidos').map(n => <Route key={n.to} path={n.to} element={<Soon title={n.label} stage={n.stage} />} />)}
+        <Route path="financeiro" element={<Financeiro />} />
+        {NAV.slice(1).filter(n => n.to !== '/vendas' && n.to !== '/produtos' && n.to !== '/pedidos' && n.to !== '/financeiro').map(n => <Route key={n.to} path={n.to} element={<Soon title={n.label} stage={n.stage} />} />)}
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
