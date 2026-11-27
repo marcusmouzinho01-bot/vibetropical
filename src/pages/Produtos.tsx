@@ -9,8 +9,8 @@ type Variant = { id: string; size_ml: number; price: number; stock_qty: number; 
 type Product = { id: string; name: string; category: string | null; description: string | null; active: boolean; product_variants: Variant[] }
 
 const num = (s: string) => Number(String(s).replace(',', '.'))
-const blank: Draft = { name: '', category: 'Salada de frutas', description: '', active: true,
-  variants: [200, 300, 550].map(ml => ({ size_ml: String(ml), price: '', stock_qty: '0', min_qty: '0', active: true })) }
+const blank: Draft = { name: '', category: '', description: '', active: true,
+  variants: [{ size_ml: '', price: '', stock_qty: '0', min_qty: '0', active: true }] }
 const field = 'w-full rounded-2xl border border-deep/20 bg-white px-4 py-3 text-base'
 
 export default function Produtos() {
@@ -60,17 +60,17 @@ export default function Produtos() {
   if (draft) return (
     <div className="space-y-4">
       <h1 className="font-script text-5xl text-leaf">{draft.id ? 'Editar produto' : 'Novo produto'}</h1>
-      <input className={field} placeholder="Nome (ex.: Salada de frutas)" value={draft.name} onChange={e => setDraft({ ...draft, name: e.target.value })} />
-      <input className={field} placeholder="Categoria" value={draft.category} onChange={e => setDraft({ ...draft, category: e.target.value })} />
-      <textarea className={field} placeholder="Descrição (opcional)" rows={2} value={draft.description} onChange={e => setDraft({ ...draft, description: e.target.value })} />
-      <h2 className="font-extrabold">Tamanhos e preços</h2>
+      <label className="block text-sm font-bold">Nome do produto<input className={field + ' mt-1'} placeholder="Ex.: Salada de frutas" value={draft.name} onChange={e => setDraft({ ...draft, name: e.target.value })} /></label>
+      <label className="block text-sm font-bold">Categoria (opcional)<input className={field + ' mt-1'} value={draft.category} onChange={e => setDraft({ ...draft, category: e.target.value })} /></label>
+      <label className="block text-sm font-bold">Descrição (opcional)<textarea className={field + ' mt-1'} rows={2} value={draft.description} onChange={e => setDraft({ ...draft, description: e.target.value })} /></label>
+      <h2 className="font-extrabold">Tamanho e preço</h2>
       {draft.variants.map((v, i) => (
         <div key={i} className="grid grid-cols-2 gap-2 rounded-3xl bg-white p-4 ring-1 ring-deep/10 sm:grid-cols-4">
-          {([['size_ml', 'Tamanho (ml)'], ['price', 'Preço (R$)'], ['stock_qty', 'Disponível'], ['min_qty', 'Mínimo']] as const).map(([k, l]) => (
+          {([['size_ml', 'Tamanho (ml)'], ['price', 'Preço (R$)'], ['stock_qty', 'Quantidade disponível'], ['min_qty', 'Quantidade mínima']] as const).map(([k, l]) => (
             <label key={k} className="text-xs font-bold">{l}<input inputMode="decimal" className={field + ' mt-1'} value={v[k]} onChange={e => setV(i, { [k]: e.target.value })} /></label>))}
           <label className="col-span-2 flex items-center gap-2 text-sm font-bold sm:col-span-4"><input type="checkbox" className="h-5 w-5" checked={v.active} onChange={e => setV(i, { active: e.target.checked })} />Tamanho ativo</label>
         </div>))}
-      <button onClick={() => setDraft({ ...draft, variants: [...draft.variants, { size_ml: '', price: '', stock_qty: '0', min_qty: '0', active: true }] })} className="font-bold text-leaf">+ Adicionar tamanho</button>
+      <button onClick={() => setDraft({ ...draft, variants: [...draft.variants, { size_ml: '', price: '', stock_qty: '0', min_qty: '0', active: true }] })} className="font-bold text-leaf">+ Adicionar outro tamanho deste produto</button>
       {msg && <p role="alert" className="rounded-2xl bg-red-50 p-3 font-semibold text-red-800">{msg}</p>}
       <div className="flex gap-3">
         <button onClick={save} disabled={busy} className="flex-1 rounded-2xl bg-leaf py-3.5 text-lg font-extrabold text-white disabled:opacity-50">{busy ? 'Salvando…' : 'Salvar produto'}</button>
