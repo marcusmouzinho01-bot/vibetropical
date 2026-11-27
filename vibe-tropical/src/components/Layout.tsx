@@ -33,20 +33,20 @@ export default function Layout() {
     `flex items-center gap-3 rounded-2xl px-4 py-3 font-bold ${isActive ? 'bg-sun text-deep' : 'text-cream hover:bg-white/10'}`
   return (
     <div className="min-h-screen lg:flex">
-      <aside className="hidden w-64 shrink-0 flex-col bg-deep p-4 lg:flex">
+      <aside className="hidden w-64 shrink-0 flex-col bg-deep p-4 lg:flex print:hidden">
         <div className="px-2 pb-4 text-center"><div className="font-script text-6xl leading-none text-cream">Vibe</div>
           <div className="text-sm tracking-[0.4em] text-sun">TROPICAL</div></div>
         <nav className="flex flex-1 flex-col gap-1">{NAV.map(n => <NavLink key={n.to} to={n.to} end={n.to === '/'} className={link}><n.icon size={20} />{n.label}</NavLink>)}</nav>
         <button onClick={out} className="flex items-center gap-3 px-4 py-3 font-bold text-cream/80"><LogOut size={20} />Sair</button>
       </aside>
       <div className="flex-1 pb-24 lg:pb-0">
-        <header className="flex items-center justify-between bg-gradient-to-r from-deep to-leaf px-5 py-3 lg:hidden">
+        <header className="flex items-center justify-between bg-gradient-to-r from-deep to-leaf px-5 py-3 lg:hidden print:hidden">
           <span className="font-script text-4xl text-cream">Vibe <span className="font-sans text-xs tracking-[0.3em] text-sun">TROPICAL</span></span>
           <Link to="/configuracoes" aria-label="Configurações" className="text-cream"><Settings /></Link>
         </header>
         <div className="mx-auto max-w-5xl p-4 lg:p-8"><Outlet context={{ name: profile.full_name ?? '' } satisfies Ctx} /></div>
       </div>
-      <nav className="fixed inset-x-0 bottom-0 z-10 flex gap-1 overflow-x-auto bg-deep p-2 lg:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-10 flex gap-1 overflow-x-auto bg-deep p-2 lg:hidden print:hidden">
         {NAV.map(n => <NavLink key={n.to} to={n.to} end={n.to === '/'} className={({ isActive }) => `flex min-w-[4.5rem] flex-col items-center gap-0.5 rounded-xl px-2 py-1.5 text-[11px] font-bold ${isActive ? 'bg-sun text-deep' : 'text-cream'}`}><n.icon size={22} />{n.label}</NavLink>)}
       </nav>
     </div>

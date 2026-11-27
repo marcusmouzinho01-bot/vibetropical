@@ -12,6 +12,8 @@ import Pedidos from './pages/Pedidos'
 import Financeiro from './pages/Financeiro'
 import Estoque from './pages/Estoque'
 import Clientes from './pages/Clientes'
+import Relatorios from './pages/Relatorios'
+import Configuracoes from './pages/Configuracoes'
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
@@ -33,7 +35,8 @@ export default function App() {
         <Route path="financeiro" element={<Financeiro />} />
         <Route path="estoque" element={<Estoque />} />
         <Route path="clientes" element={<Clientes />} />
-        {NAV.slice(1).filter(n => n.to !== '/vendas' && n.to !== '/produtos' && n.to !== '/pedidos' && n.to !== '/financeiro' && n.to !== '/estoque' && n.to !== '/clientes').map(n => <Route key={n.to} path={n.to} element={<Soon title={n.label} stage={n.stage} />} />)}
+        <Route path="relatorios" element={<Relatorios />} />
+        <Route path="configuracoes" element={<Configuracoes />} />
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

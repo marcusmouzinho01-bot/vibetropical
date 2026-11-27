@@ -8,14 +8,14 @@ type Exp = { id: string; description: string; amount: number; expense_date: stri
 type Cat = { id: string; name: string }
 const PAY: [string, string][] = [['dinheiro', 'Dinheiro'], ['pix', 'Pix'], ['credito', 'Crédito'], ['debito', 'Débito']]
 const PAYL = Object.fromEntries(PAY) as Record<string, string>
-const PRESETS: [string, string][] = [['hoje', 'Hoje'], ['ontem', 'Ontem'], ['7dias', 'Últimos 7 dias'], ['mes', 'Este mês'], ['anterior', 'Mês anterior'], ['custom', 'Período']]
+export const PRESETS: [string, string][] = [['hoje', 'Hoje'], ['ontem', 'Ontem'], ['7dias', 'Últimos 7 dias'], ['mes', 'Este mês'], ['anterior', 'Mês anterior'], ['custom', 'Período']]
 const field = 'w-full rounded-2xl border border-deep/20 bg-white px-4 py-3 text-base'
 const card = 'rounded-3xl bg-white p-5 ring-1 ring-deep/10'
 const num = (s: string) => Number(String(s).replace(',', '.'))
 const sum = (xs: number[]) => xs.reduce((a, b) => a + b, 0)
 const addDays = (d: Date, n: number) => { const x = new Date(d); x.setDate(x.getDate() + n); return x }
 
-function range(p: string, cf: string, ct: string): [string, string] {
+export function range(p: string, cf: string, ct: string): [string, string] {
   const t = new Date()
   if (p === 'hoje') return [dayKey(t), dayKey(t)]
   if (p === 'ontem') { const y = dayKey(addDays(t, -1)); return [y, y] }

@@ -1,3 +1,4 @@
 @tailwind base;@tailwind components;@tailwind utilities;
 body{@apply bg-[#FBF7EA] text-deep font-sans antialiased}
+@media print{*{-webkit-print-color-adjust:exact;print-color-adjust:exact}body{background:#fff}}
 :focus-visible{outline:3px solid #F5B936;outline-offset:2px}
